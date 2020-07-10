@@ -214,12 +214,53 @@
         </h3>
         <p>
           The <dfn>screenshots</dfn> member is an <a>array</a> of
-          {{ManifestImageResource}}s, representing the web application in
+          {{ScreenshotImageResource}}s, representing the web application in
           common usage scenarios.
         </p>
+      </section>
+    </section>
+    <section data-cite="manifest image-resource" data-dfn-for=
+    "ScreenshotImageResource">
+      <h2>
+        <dfn>ScreenshotImageResource</dfn> and its members
+      </h2>
+      <pre class="idl">
+        dictionary ScreenshotImageResource : ManifestImageResource {
+          required DOMString label;
+          DOMString platform;
+        };
+      </pre>
+      <p>
+        Each {{ScreenshotImageResource}} is an image that provides examples of
+        what the application looks like in various contexts. The
+        {{ScreenshotImageResource}} leverages the infrastructure of the
+        {{ManifestImageResource}}, with minor modifications.
+      </p>
+      <section>
+        <h3>
+          <dfn>label</dfn> member
+        </h3>
         <p>
           For accessibility purposes, authors MUST provide a
           {{ImageResource/label}} for each screenshot.
+        </p>
+      </section>
+      <section>
+        <h3>
+          <dfn>platform</dfn> member
+        </h3>
+        <p>
+          The {{ScreenshotImageResource/platform}} member represents the
+          <a>platform</a> for which a given screenshot applies. Authors are
+          encouraged to only use this member when the screenshot is only
+          applicable in a specific context.
+        </p>
+        <p>
+          Different digital storefronts and services may want to define their
+          own string values for this property. To allow the community to easily
+          track those values, we’ve created a <a href=
+          "https://github.com/w3c/manifest-app-info/wiki/Platform-Registry">Platform
+          Registry</a>.
         </p>
       </section>
     </section>
