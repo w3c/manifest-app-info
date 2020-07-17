@@ -31,10 +31,11 @@
     <section id='abstract'>
       <p>
         This document is a registry of supplementary members for the
-        [[[appmanifest]]] specification that provide additional metadata for
-        use in a digital storefront or other surfaces where this web
-        application may be marketed or distributed (i.e., outside the context
-        of a web browser).
+        [[[appmanifest]]] specification that provide additional metadata to an
+        <a>application manifest</a>. This metadata can be used in a digital
+        storefront or other surfaces where this web application may be marketed
+        or distributed, or to enhance an installation dialog when [=installed
+        web application|installing=] a web application.
       </p>
     </section>
     <section id="sotd">
@@ -69,8 +70,12 @@
       </h2>
       <p>
         The following members supplement the members of an [=application
-        manifest=]. All members are all optional and can be added at the root
-        of an [=application manifest=], as shown in the following example.
+        manifest=]. These members are classified as supplementary because they
+        are not [=applied=] to a web application at runtime (i.e., they are
+        purely advisory and don't affect how a user agent presents an
+        <a>installed web application</a>). All members are all optional and can
+        be added at the root of an [=application manifest=], as shown in the
+        following example.
       </p>
       <pre class="example json" title="Using the supplementary members">
       {
@@ -222,7 +227,7 @@
       </section>
       <section>
         <h3>
-          `screenshot` member
+          `screenshots` member
         </h3>
         <p>
           The <code><dfn>screenshots</dfn></code> member is an array of
@@ -257,16 +262,48 @@
         </h3>
         <p>
           The <code><dfn>platform</dfn></code> member is a <a>string</a> that
-          represents the operating system for which a given screenshot applies.
-          Authors are encouraged to only use this member when the screenshot is
-          only applicable in a specific context.
+          represents the distribution platform for which a given screenshot
+          applies. Authors are encouraged to only use this member when the
+          screenshot is only applicable in a specific context.
         </p>
         <p>
-          Different digital storefronts and services may want to define their
-          own string values for this property. To allow the community to easily
-          track those values, we’ve created a <a href=
-          "https://github.com/w3c/manifest-app-info/wiki/Platform-Registry">Platform
-          Registry</a>.
+          List of known platforms and what application distribution platform
+          they map to:
+        </p>
+        <dl>
+          <dt>
+            chrome_web_store
+          </dt>
+          <dd>
+            <a href="https://chrome.google.com/webstore">Google Chrome Web
+            Store</a>.
+          </dd>
+          <dt>
+            play
+          </dt>
+          <dd>
+            <a href="https://play.google.com">Google Play Store.</a>
+          </dd>
+          <dt>
+            itunes
+          </dt>
+          <dd>
+            <a href="https://itunes.apple.com/us/genre/ios/">iTunes App
+            Store.</a>
+          </dd>
+          <dt>
+            windows
+          </dt>
+          <dd>
+            <a href="https://www.microsoft.com/en-us/store/apps">Windows App
+            Store.</a>
+          </dd>
+        </dl>
+        <p class="note" title="Adding more categories">
+          If you'd like to add additional platform, please file a bug or send a
+          pull request to the <a href=
+          "https://github.com/w3c/manifest-app-info/">manifest-app-info GitHub
+          repository</a>.
         </p>
       </section>
     </section>
@@ -288,7 +325,7 @@
       <p>
         Rob Dolin for spearheading a lot of this work, specially the
         `iarc_rating_id` member, and Kenneth Rohde Christiansen for helping to
-        vet these idea.
+        vet these ideas.
       </p>
       <p>
         We'd also like to thank the following contributors: <span id=
