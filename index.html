@@ -281,6 +281,25 @@
           applies. Authors are encouraged to only use this member when the
           screenshot is only applicable in a specific context.
         </p>
+        <p class="note" title="Platform usage guidance for authors">
+          Authors should only use `platform` for instances where a screenshot
+          is not representative of a universal experience. For instance, if the
+          layout/design differs based on orientation, setting "narrow" or
+          "wide" is advisable. Similarly, an OS-specific `platform` designation
+          should be reserved for instances where the screenshot includes
+          functionality only available on that specific platform.
+        </p>
+        <p>
+          User agents MAY show as many (or as few) screenshots as they choose,
+          but SHOULD NOT display screenshots that do not pertain to their
+          platform (e.g., Google Play should not show iOS-specific
+          screenshots).
+        </p>
+        <p>
+          User agents MAY use a screenshot’s aspect ratio
+          ({{ImageResource/sizes}}) in determining if the screenshot should be
+          displayed.
+        </p>
         <p>
           List of general-purporse `platform` values:
         </p>
