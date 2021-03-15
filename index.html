@@ -59,12 +59,12 @@
         storefronts, search results) where they are presented alongside native
         applications, it becomes quite important for them to appear similarly
         to their native counterparts. A web application can define both its
-        {{WebAppManifest/name}} and {{WebAppManifest/icons}} in the manifest,
-        but those keys do not provide enough information to help users
-        determine whether they might want to install it. Users have become
-        accustomed to being offered more details about the applications they
-        consider installing, and this document defines additional manifest
-        members that can provide that.
+        [=manifest/name=] and [=manifest/icons=] in the manifest, but those
+        keys do not provide enough information to help users determine whether
+        they might want to install it. Users have become accustomed to being
+        offered more details about the applications they consider installing,
+        and this document defines additional manifest members that can provide
+        that.
       </p>
     </section>
     <section>
@@ -270,6 +270,25 @@
           applies. Authors are encouraged to only use this member when the
           screenshot is only applicable in a specific context.
         </p>
+        <p class="note" title="Platform usage guidance for authors">
+          Authors should only use `platform` for instances where a screenshot
+          is not representative of a universal experience. For instance, if the
+          layout/design differs based on orientation, setting "narrow" or
+          "wide" is advisable. Similarly, an OS-specific `platform` designation
+          should be reserved for instances where the screenshot includes
+          functionality only available on that specific platform.
+        </p>
+        <p>
+          User agents MAY show as many (or as few) screenshots as they choose,
+          but SHOULD NOT display screenshots that do not pertain to their
+          platform (e.g., Google Play should not show iOS-specific
+          screenshots).
+        </p>
+        <p>
+          User agents MAY use a screenshot’s aspect ratio
+          ({{ImageResource/sizes}}) in determining if the screenshot should be
+          displayed.
+        </p>
         <p>
           List of general-purporse `platform` values:
         </p>
@@ -403,6 +422,7 @@
         Manifest spec</a>.
       </p>
     </section>
+    <section id="conformance"></section>
     <section class="appendix">
       <h2>
         Acknowledgements
