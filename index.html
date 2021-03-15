@@ -352,8 +352,8 @@
           </dd>
         </dl>
         <p>
-          List of `platform` values aligned with application distribution
-          platforms:
+          List of `platform` values aligned with <dfn>application distribution
+          platforms</dfn>:
         </p>
         <dl>
           <dt>
@@ -392,6 +392,76 @@
         </p>
       </section>
     </section>
+    <section id="app-info-hints">
+      <h2>
+        App Information Hints
+      </h2>
+      <p>
+        Developers often want to know where their customers are coming from in
+        order to evaluate the success of marketing efforts within a given
+        catalog. In the traditional software distribution world, app catalogs
+        enable developers to see how many users installed their app from that
+        catalog. With web-based distribution, this sort of telemetry is
+        impossible to obtain. To fill this gap, this spec provides for the
+        following <a data-cite=
+        "client-hints-infrastructure#client-hint-token">client hint token</a>s:
+      </p>
+      <ul>
+        <li>`Sec-CH-App-Installed` whose value is a suitable [=Installation
+        Flag value=]
+        </li>
+        <li>`Sec-CH-App-Installation-Source` whose value is a suitable
+        [=Installation Source value=]
+        </li>
+      </ul>
+      <p>
+        It is possible that these headers <a data-cite=
+        "ua-client-hints#fingerprinting">may be used for passive fingerprinting
+        of a user</a> and User Agents should take care to <a data-cite=
+        "ua-client-hints#access">restrict access</a> to this information.
+      </p>
+      <section>
+        <h3>
+          The 'Sec-CH-App-Installed' Header Field
+        </h3>
+        <p>
+          The <dfn data-export="" data-lt=
+          "installation flag value">Sec-CH-App-Installed</dfn> request header
+          field gives a server information about whether or not a user agent is
+          representing the app in an "installed" state. It is a <a href=
+          "https://tools.ietf.org/html/rfc8941">Structured Header</a> whose
+          value MUST be a <a href=
+          "https://tools.ietf.org/html/rfc8941#section-3.3.6">boolean</a>.
+        </p>
+        <p>
+          The header's ABNF is:
+        </p>
+        <pre>
+          Sec-CH-App-Installed = sh-boolean
+        </pre>
+      </section>
+      <section>
+        <h3>
+          The 'Sec-CH-App-Installation-Source' Header Field
+        </h3>
+        <p>
+          The <dfn data-export="" data-lt=
+          "installation source value">Sec-CH-App-Installation-Source</dfn>
+          request header field gives a server information about the source that
+          triggered installation of the app. It is a <a href=
+          "https://tools.ietf.org/html/rfc8941">Structured Header</a> whose
+          value MUST be a <a href=
+          "https://tools.ietf.org/html/rfc8941#section-3.3.3">string</a>. Its
+          value SHOULD match one of the [=application distribution platforms=].
+        </p>
+        <p>
+          The header's ABNF is:
+        </p>
+        <pre>
+          Sec-CH-App-Installation-Source = sh-string
+        </pre>
+      </section>
+    </section>
     <section id="internationalization" class="appendix informative">
       <h2>
         Internationalization
@@ -403,6 +473,7 @@
         Manifest spec</a>.
       </p>
     </section>
+    <section id="conformance"></section>
     <section class="appendix">
       <h2>
         Acknowledgements
