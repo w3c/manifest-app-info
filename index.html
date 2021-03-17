@@ -26,11 +26,11 @@
         repoURL: "w3c/manifest-app-info",
         branch: "main", // alternative branch
       },
-      xref: true,
+      xref: "web-platform",
     };
     </script>
   </head>
-  <body data-cite="appmanifest">
+  <body data-cite="APPMANIFEST">
     <section id='abstract'>
       <p>
         This document is a registry of supplementary members for the
@@ -90,7 +90,7 @@
           "src": "images/screenshot.png",
           "sizes": "800x600",
           "platform": "windows",
-          "label": "Lots of organizations to donate to",
+          "label": "Lots of organizations to donate to"
         }]
       }
       </pre>
@@ -257,8 +257,19 @@
           serves as the <a data-cite=
           "accname-1.2#dfn-accessible-name">accessible name</a> of that
           <a>screenshots object</a>. For accessibility, authors are encouraged
-          to provide a <a>label</a> for each screenshot.
+          to provide a <a>label</a> for each screenshot. 
+          This member can serve as alternative text for the rendered screenshot.
         </p>
+        <pre class="example json" title="Using the supplementary members">
+        {
+          "screenshots": [{
+            "src": "images/screenshot.png",
+            "sizes": "800x600",
+            "platform": "wide",
+            "label": "With Software, you can select a part of your screen and take a screenshot in seconds."
+          }]
+        }
+        </pre>
       </section>
       <section>
         <h3>
