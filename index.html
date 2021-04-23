@@ -430,7 +430,7 @@
     </section>
     <section id="app-info-hints">
       <h2>
-        App Information Hints
+        App Information Headers
       </h2>
       <p>
         Developers often want to know where their customers are coming from in
@@ -438,22 +438,25 @@
         catalog. In the traditional software distribution world, app catalogs
         enable developers to see how many users installed their app from that
         catalog. With web-based distribution, this sort of telemetry is
-        impossible to obtain. To fill this gap, this spec provides for the
-        following <a data-cite=
-        "client-hints-infrastructure#client-hint-token">client hint token</a>s:
+        impossible to obtain. To fill this gap, this document suggests that user agents should consider providing this information via <a data-cite="rfc7231#section-5.5.2">the `Referer` header</a> (also exposed via {{Document/referrer}}). It is recommended that the user agent supply this value only when the web app is first launched and when there is no valid referrer information that should be passed along with the {{Request}}.
       </p>
       <ul>
+        <li>`Referer` whose value is a suitable [=Installation Source value=]
+        </li>
+      </ul>
+      <p>In order to make content-negotiation decisions, some developers need to know whether the web app is currently running as an installed app. To convey this information, this document provides for the
+        following <a data-cite=
+        "client-hints-infrastructure#client-hint-token">client hint token</a>:
+      </p>
+       <ul>
         <li>`Sec-CH-App-Installed` whose value is a suitable [=Installation
         Flag value=]
-        </li>
-        <li>`Sec-CH-App-Installation-Source` whose value is a suitable
-        [=Installation Source value=]
         </li>
       </ul>
       <p>
         It is possible that these headers <a data-cite=
         "https://wicg.github.io/ua-client-hints/#fingerprinting">may be used
-        for passive fingerprinting of a user</a> and User Agents should take
+        for active fingerprinting of a user</a> and User Agents should take
         care to <a data-cite=
         "https://wicg.github.io/ua-client-hints/#access">restrict access</a> to
         this information.
@@ -474,28 +477,17 @@
           The header's ABNF is:
         </p>
         <pre>
-          Sec-CH-App-Installed = sh-boolean
+          Sec-CH-App-Installed = sf-boolean
         </pre>
       </section>
       <section>
         <h3>
-          The 'Sec-CH-App-Installation-Source' Header Field
+          The 'Referer' Header Field
         </h3>
         <p>
-          The <dfn data-export="" data-lt=
-          "installation source value">Sec-CH-App-Installation-Source</dfn>
-          request header field gives a server information about the source that
-          triggered installation of the app. It is a <a data-cite=
-          "rfc8941#section-3">Structured Header</a> whose value MUST be a
-          <a data-cite="rfc8941#section-3.3.3">string</a>. Its value SHOULD
-          match one of the [=application distribution platforms=].
+          The <a data-cite="rfc7231#section-5.5.2">`Referer`</a> {{Request}} header field can be used to give a server information about the source that
+          triggered installation of the app. When used in this capacity, it’s value should be one of the recognized [=application distribution platforms=].
         </p>
-        <p>
-          The header's ABNF is:
-        </p>
-        <pre>
-          Sec-CH-App-Installation-Source = sh-string
-        </pre>
       </section>
     </section>
     <section id="internationalization" class="appendix informative">
