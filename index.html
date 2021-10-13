@@ -235,6 +235,31 @@
       </section>
       <section>
         <h3>
+          `publisher` member
+        </h3>
+        <p>
+          The <code><dfn>publisher</dfn></code> member is a singleton
+          <a>object</a> that provides the application publisher's `name` and
+          `url`.
+        </p>
+        <pre class="example json" title="Using the publisher member">
+        {
+          "name": "An App",
+          "publisher": {
+            "name": "Organization Name",
+            "url": "https://organization.tld/"
+          }
+        }
+        </pre>
+        <p>
+          Given that this member could be easily abused, implementors should
+          [=verify the publisher=] before presenting this information to end
+          users. In the absense of a [=verified publisher=], implementors in
+          need of publisher information may use the application's [=host=].
+        </p>
+      </section>
+      <section>
+        <h3>
           `screenshots` member
         </h3>
         <p>
@@ -431,6 +456,61 @@
           repository</a>.
         </p>
       </section>
+    </section>
+    <section>
+      <h2>
+        <dfn data-lt="verify the publisher|verified publisher">Verifying the
+        publisher</dfn>
+      </h2>
+      <p>
+        To prevent application spoofing and other attacks, implementers should
+        verify publisher information.
+      </p>
+      <p>
+        To <dfn>verify an application's publisher</dfn>, given [=ordered map=]
+        |manifest:ordered map|, and [=object=] |publisher:object|:
+      </p>
+      <ol class="algorithm">
+        <li>Let |fallback:object| be a new [=object=].
+        </li>
+        <li>Set |fallback|["name"] to the [=url/host=] of |manifest|["scope"].
+        </li>
+        <li>Set |fallback|["url"] to an empty [=string=].
+        </li>
+        <li>If |publisher| and |publisher|["url"], then
+          <ol>
+            <li>Let |app_origin:string| be the [=url/origin=] of
+            |manifest|["scope"].
+            </li>
+            <li>Let |publisher_origin:string| be the [=url/origin=] of
+            |publisher|["url"].
+            </li>
+            <li>Let |verification_file:string| be
+            "/.well-known/published-web-apps".
+            </li>
+            <li>Let |verification:string| be the result of concatenating
+            |publisher_origin| and |verification_file|
+            </li>
+            <li>Let |response:object| be the [=response=] resulting from
+            [=fetching|fetch=] |verification|.
+            </li>
+            <li>If |response|["status"] equals "200", then
+              <ol>
+                <li>Let |owned_urls:ordered set| be an [=ordered set=] whose
+                value is the result of splitting |response|["body"] on CRLF.
+                </li>
+                <li>If |owned_urls| contains |app_origin|, set
+                |manifest|["publisher"] to |publisher|
+                </li>
+              </ol>
+            </li>
+            <li>Otherwise, set |manifest|["publisher"] to |fallback|.
+            </li>
+          </ol>
+        </li>
+        <li>Otherwise, set |manifest|["publisher"] to |fallback|.
+        </li>
+      </ol>
     </section>
     <section id="internationalization" class="appendix informative">
       <h2>
