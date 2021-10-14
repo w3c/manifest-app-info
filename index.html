@@ -252,10 +252,9 @@
         }
         </pre>
         <p>
-          Given that this member could be easily abused, implementors should
-          [=verify the publisher=] before presenting this information to end
-          users. In the absense of a [=verified publisher=], implementors in
-          need of publisher information may use the application's [=host=].
+          Given that this information is unverified, implementors should
+          [=verify an application's publisher=] before presenting this information to end
+          users.
         </p>
       </section>
       <section>
@@ -459,7 +458,7 @@
     </section>
     <section>
       <h2>
-        <dfn data-lt="verify the publisher|verified publisher">Verifying the
+        <dfn>Verifying the
         publisher</dfn>
       </h2>
       <p>
@@ -477,13 +476,14 @@
         </li>
         <li>Set |fallback|["url"] to an empty [=string=].
         </li>
-        <li>If |publisher| and |publisher|["url"], then
+        <li>Set |manifest|["publisher"] to |fallback|.
+        </li>
+        <li>If |publisher|["url"], then
           <ol>
             <li>Let |app_origin:string| be the [=url/origin=] of
             |manifest|["scope"].
             </li>
-            <li>Let |publisher_origin:string| be the [=url/origin=] of
-            |publisher|["url"].
+            <li>Let |publisher_origin:string| be the [=url/origin=] of |publisher|["url"].
             </li>
             <li>Let |verification_file:string| be
             "/.well-known/published-web-apps".
@@ -504,11 +504,7 @@
                 </li>
               </ol>
             </li>
-            <li>Otherwise, set |manifest|["publisher"] to |fallback|.
-            </li>
           </ol>
-        </li>
-        <li>Otherwise, set |manifest|["publisher"] to |fallback|.
         </li>
       </ol>
     </section>
