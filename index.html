@@ -331,13 +331,8 @@
           |manifest:ordered map|, and [=URL=] |manifest URL:URL|:
         </p>
         <ol class="algorithm">
-          <li>If the type of |policies|[|policy_name|] is not [=string=],
-          return.
-          </li>
-          <li>If |policies|[|policy_name|] is the empty string, return.
-          </li>
-          <li>Let |policy URL:URL| be the result of [=URL Parser|parsing=]
-          |policies|[|policy_name|], using |manifest URL| as the base URL.
+          <li>Let |policy URL:URL| be the result of [=manifest/processing a URL
+          value=], passing |policies|[|policy_name|] and |manifest URL|.
           </li>
           <li>If |policy URL| is failure, return.
           </li>
