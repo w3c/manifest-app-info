@@ -43,7 +43,7 @@ instructions on running HTML5 tidy, see below.
 ## Running HTML5 Tidy
 
 Please make sure you have HTML5 tidy installed, instead of
-the the one that ships with *nix systems. You can confirm this by running:
+the one that ships with *nix systems. You can confirm this by running:
 
 ```bash
 tidy --version  #HTML Tidy for HTML5 (experimental) for ...
