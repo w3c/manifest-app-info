@@ -105,7 +105,7 @@
           `categories` member
         </h3>
         <p>
-          The <code><dfn data-dfn-for="manifest-app-info" class="export">categories</dfn></code> member is an <a>array</a> of
+          The <code><dfn data-dfn-for="manifest" class="export">categories</dfn></code> member is an <a>array</a> of
           <a>strings</a> that describes the application categories to which the
           web application belongs. It is meant as a hint to catalogs or stores
           listing web applications and it is expected that these will make a
@@ -193,7 +193,7 @@
           `description` member
         </h3>
         <p>
-          The <code><dfn data-dfn-for="manifest-app-info" class="export">description</dfn></code> member is a <a>string</a>
+          The <code><dfn data-dfn-for="manifest" class="export">description</dfn></code> member is a <a>string</a>
           that allows the developer to describe the purpose of the web
           application. It serves as the <a data-cite=
           "accname-1.2#dfn-accessible-description">accessible description</a>
@@ -205,7 +205,7 @@
           `iarc_rating_id` member
         </h3>
         <p>
-          The <code><dfn data-dfn-for="manifest-app-info" class="export">iarc_rating_id</dfn></code> member is a <a>string</a>
+          The <code><dfn data-dfn-for="manifest" class="export">iarc_rating_id</dfn></code> member is a <a>string</a>
           that represents the <a href=
           "https://www.globalratings.com/">International Age Rating Coalition
           (IARC)</a> certification code of the web application. It is intended
@@ -215,7 +215,7 @@
         <p class="note">
           An IARC certificate can be obtained via participating storefronts,
           intended to be used for distributing the web app. The
-          <a>iarc_rating_id</a> member only takes a single certification code.
+          {{manifest/iarc_rating_id}} member only takes a single certification code.
           The same code can be shared across participating storefronts, as long
           as the distributed product remains the same (i.e., doesn’t serve
           totally different code paths depending on user agent sniffing and the
@@ -234,13 +234,13 @@
           `screenshots` member
         </h3>
         <p>
-          The <code><dfn data-dfn-for="manifest-app-info" class="export">screenshots</dfn></code> member is an array of
+          The <code><dfn data-dfn-for="manifest" class="export">screenshots</dfn></code> member is an array of
           <a>screenshots objects</a>, representing the web application in
           common usage scenarios.
         </p>
       </section>
     </section>
-    <section data-cite="image-resource">
+    <section data-cite="image-resource" data-dfn-for="manifest/screenshots">
       <h2>
         Screenshot object and its members
       </h2>
@@ -253,7 +253,7 @@
           `label` member
         </h3>
         <p>
-          The <code><dfn data-dfn-for="manifest-app-info" class="export">label</dfn></code> member is a <a>string</a> that
+          The <code><dfn class="export">label</dfn></code> member is a <a>string</a> that
           serves as the <a data-cite=
           "accname-1.2#dfn-accessible-name">accessible name</a> of that
           <a>screenshots object</a>. For accessibility, authors are encouraged
@@ -276,7 +276,7 @@
           `platform` member
         </h3>
         <p>
-          The <code><dfn data-dfn-for="manifest-app-info" class="export">platform</dfn></code> member is a <a>string</a> that
+          The <code><dfn class="export">platform</dfn></code> member is a <a>string</a> that
           represents the distribution platform for which a given screenshot
           applies. Authors are encouraged to only use this member when the
           screenshot is only applicable in a specific context.
