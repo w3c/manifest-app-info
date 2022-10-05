@@ -311,7 +311,7 @@
           "screenshots": [{
             "src": "images/screenshot.png",
             "sizes": "800x600",
-            "platform": "wide",
+            "form_factor": "wide",
             "label": "With Software, you can select a part of your screen and take a screenshot in seconds."
           }]
         }
@@ -328,12 +328,11 @@
           screenshot is only applicable in a specific context.
         </p>
         <p class="note" title="Platform usage guidance for authors">
-          Authors should only use `platform` for instances where a screenshot
-          is not representative of a universal experience. For instance, if the
-          layout/design differs based on orientation, setting "narrow" or
-          "wide" is advisable. Similarly, an OS-specific `platform` designation
-          should be reserved for instances where the screenshot includes
-          functionality only available on that specific platform.
+          Authors should only use `platform` for instances where a screenshot is
+          not representative of a universal experience. For instance, an
+          OS-specific `platform` designation should be reserved for instances
+          where the screenshot includes functionality only available on that
+          specific platform.
         </p>
         <p>
           User agents might show as many (or as few) screenshots as they
@@ -346,24 +345,6 @@
           ({{ImageResource/sizes}}) in determining if the screenshot should be
           displayed.
         </p>
-        <p>
-          List of general-purporse `platform` values:
-        </p>
-        <dl>
-          <dt>
-            narrow
-          </dt>
-          <dd>
-            For narrow screenshots (e.g., wearables, mobile devices).
-          </dd>
-          <dt>
-            wide
-          </dt>
-          <dd>
-            For screenshots applicable to wide screens only (e.g., status
-            boards).
-          </dd>
-        </dl>
         <p>
           List of `platform` values that are specific to an operating system:
         </p>
@@ -467,6 +448,49 @@
         </p>
       </section>
     </section>
+    <section>
+      <h3>
+        `form_factor` member
+      </h3>
+      <p>
+        The <code><dfn data-for="manifest" class="export">form_factor</dfn></code> member is a
+        <a>string</a> that represents the screen shape of a broad class of
+        devices for which a given screenshot applies. Authors are encouraged to
+        only use this member when the screenshot is only applicable in a
+        specific context.
+      </p>
+      <p class="note" title="form_factor usage guidance for authors">
+        Authors should only use `form_factor` for instances where a screenshot
+        is not representative of a universal experience. For instance, if the
+        layout/design differs based on the screen orientation, setting "narrow" or
+        "wide" is advisable.
+      </p>
+      <p>
+        User agents might show as many (or as few) screenshots as they choose,
+        but shouldn't display screenshots that do not pertain to their
+        form factor (e.g., mobile phones shouldn't show "wide" `form_factor`
+        screenshots).
+      </p>
+      <p>
+        List of `form_factor` values:
+      </p>
+      <dl>
+        <dt>
+          narrow
+        </dt>
+        <dd>
+          For screenshots applicable to narrow screens only (e.g., mobile devices).
+        </dd>
+        <dt>
+          wide
+        </dt>
+        <dd>
+          For screenshots applicable to wide screens only (e.g., status
+          boards).
+        </dd>
+      </dl>
+    </section>
+  </section>
     <section id="internationalization" class="appendix informative">
       <h2>
         Internationalization
