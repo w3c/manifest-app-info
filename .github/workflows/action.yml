@@ -21,4 +21,4 @@ jobs:
           VALIDATE_LINKS: true # Validate links and cross references; default: true
           VALIDATE_MARKUP: true # Validate HTML markup; default: true
           W3C_BUILD_OVERRIDE: |
-            specStatus: WD
+            specStatus: NOTE
