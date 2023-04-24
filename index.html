@@ -341,6 +341,9 @@
           screenshots).
         </p>
         <p>
+          When no `platform` is set, a user agent should assume the screenshot was intended for universal usage.
+        </p>
+        <p>
           User agents can use a screenshot’s aspect ratio
           ({{ImageResource/sizes}}) in determining if the screenshot should be
           displayed.
@@ -468,6 +471,9 @@
           but shouldn't display screenshots that do not pertain to their
           form factor (e.g., mobile phones shouldn't show "wide" `form_factor`
           screenshots).
+        </p>
+        <p>
+          When no `form_factor` is set, a user agent should assume the screenshot was intended for universal usage.
         </p>
         <p>
           List of `form_factor` values:
