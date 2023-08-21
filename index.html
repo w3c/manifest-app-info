@@ -406,8 +406,8 @@
           </dd>
         </dl>
         <p>
-          List of `platform` values aligned with application distribution
-          platforms:
+          List of `platform` values aligned with <dfn>application distribution
+          platforms</dfn>:
         </p>
         <dl>
           <dt>
@@ -495,6 +495,68 @@
             boards).
           </dd>
         </dl>
+      </section>
+    </section>
+    <section id="app-info-hints">
+      <h2>
+        App Information Headers
+      </h2>
+      <p>
+        Developers often want to know where their customers are coming from in
+        order to evaluate the success of marketing efforts within a given
+        catalog. In the traditional software distribution world, app catalogs
+        enable developers to see how many users installed their app from that
+        catalog. With web-based distribution, this sort of telemetry is
+        impossible to obtain. To fill this gap, this document suggests that user agents should consider providing this information via <a data-cite="rfc7231#section-5.5.2">the `Referer` header</a> (also exposed via {{Document/referrer}}). It is recommended that the user agent supply this value only when the web app is first launched and when there is no valid referrer information that should be passed along with the {{Request}}.
+      </p>
+      <ul>
+        <li>`Referer` whose value is a suitable [=Installation Source value=]
+        </li>
+      </ul>
+      <p>In order to make content-negotiation decisions, some developers need to know whether the web app is currently running as an installed app. To convey this information, this document provides for the
+        following <a data-cite=
+        "client-hints-infrastructure#client-hint-token">client hint token</a>:
+      </p>
+       <ul>
+        <li>`Sec-CH-App-Installed` whose value is a suitable [=Installation
+        Flag value=]
+        </li>
+      </ul>
+      <p>
+        It is possible that these headers <a data-cite=
+        "https://wicg.github.io/ua-client-hints/#fingerprinting">may be used
+        for active fingerprinting of a user</a> and User Agents should take
+        care to <a data-cite=
+        "https://wicg.github.io/ua-client-hints/#access">restrict access</a> to
+        this information.
+      </p>
+      <section>
+        <h3>
+          The 'Sec-CH-App-Installed' Header Field
+        </h3>
+        <p>
+          The <dfn data-export="" data-lt=
+          "installation flag value">Sec-CH-App-Installed</dfn> request header
+          field gives a server information about whether or not a user agent is
+          representing the app in an "installed" state. It is a <a data-cite=
+          "rfc8941#section-3">Structured Header</a> whose value MUST be a
+          <a data-cite="rfc8941#section-3.3.6">boolean</a>.
+        </p>
+        <p>
+          The header's ABNF is:
+        </p>
+        <pre>
+          Sec-CH-App-Installed = sf-boolean
+        </pre>
+      </section>
+      <section>
+        <h3>
+          The 'Referer' Header Field
+        </h3>
+        <p>
+          The <a data-cite="rfc7231#section-5.5.2">`Referer`</a> {{Request}} header field can be used to give a server information about the source that
+          triggered installation of the app. When used in this capacity, it’s value should be one of the recognized [=application distribution platforms=].
+        </p>
       </section>
     </section>
     <section id="internationalization" class="appendix informative">
