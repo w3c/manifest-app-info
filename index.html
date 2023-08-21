@@ -91,7 +91,12 @@
           "sizes": "800x600",
           "platform": "windows",
           "label": "Lots of organizations to donate to"
-        }]
+        }],
+        "policies": {
+          "accessibility": "/accessibility",
+          "usage": "/terms",
+          "privacy": "/privacy"
+        }
       }
       </pre>
       <p>
@@ -274,6 +279,90 @@
           "https://www.globalratings.com/for-developers.aspx">How developers
           can get their games and apps rated with IARC</a>.
         </p>
+      </section>
+      <section>
+        <h3>
+          `policies` member
+        </h3>
+        <p>
+          The <code><dfn>policies</dfn></code> member is an object that enables
+          an application to identify its key policy URLs. The members of this
+          object are all optional, but are based on common policy types. The
+          value given for each policy type is a [=URL=] that the developer has
+          identified as providing the complete policy text.
+        </p>
+        <p>
+          The `policies` object supports the following members:
+        </p>
+        <ul>
+          <li>
+            <dfn>accessibility</dfn> - Explains application functionality and
+            known accessibility limitations in common terms (i.e.,
+            "Accessibility Statement").
+          </li>
+          <li>
+            <dfn data-lt="content license">license</dfn> - Provides the content
+            license.
+          </li>
+          <li>
+            <dfn data-lt="privacy policy">privacy</dfn> - Provides detail
+            concerning the ways the app gathers, uses, discloses, and manages
+            customer data (i.e., "Privacy Policy").
+          </li>
+          <li>
+            <dfn data-lt="security policy">security</dfn> - Outlines how the
+            application secures user data and how it manages security breaches
+            when they occur (i.e., "Security Policy").
+          </li>
+          <li>
+            <dfn data-lt="support policy">support</dfn> - Provides details
+            about application support and how to obtain it (i.e., "Support
+            Policy").
+          </li>
+          <li>
+            <dfn data-lt="usage policy">usage</dfn> - Outlines the legal
+            agreement between the service provider and its users (i.e., "Terms
+            of Use" or "Terms and Conditions").
+          </li>
+        </ul>
+        <p>
+          To <dfn>process a `policies` member</dfn>, given [=object=]
+          |policies:JSON|, [=string=] |policy_name:string|, [=ordered map=]
+          |manifest:ordered map|, and [=URL=] |manifest URL:URL|:
+        </p>
+        <ol class="algorithm">
+          <li>If the type of |policies|[|policy_name|] is not [=string=],
+          return.
+          </li>
+          <li>If |policies|[|policy_name|] is the empty string, return.
+          </li>
+          <li>Let |policy URL:URL| be the result of [=URL Parser|parsing=]
+          |policies|[|policy_name|], using |manifest URL| as the base URL.
+          </li>
+          <li>If |policy URL| is failure, return.
+          </li>
+          <li>Otherwise, set |manifest|["policies"][|policy_name|] to |policy
+          URL|.
+          </li>
+        </ol>
+        <aside class="example">
+          <pre class="json" title="Using the policy member">
+          {
+            "name": "An App",
+            "scope": "/",
+            "policies": {
+              "usage": "/terms",
+              "license": "/#license",
+              "privacy": "https://organization.tld/privacy"
+            }
+          }
+          </pre>
+          <p>
+            In this example, the [=usage policy=] and [=content license=]
+            values are resolved with respect to the [=manifest=] [=URL=]. The
+            [=privacy policy=] value points to an external [=URL=].
+          </p>
+        </aside>
       </section>
       <section>
         <h3>
