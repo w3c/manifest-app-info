@@ -86,6 +86,10 @@
         "categories": ["fundraising", "donations"],
         "description": "This app helps you donate to worthy causes.",
         "iarc_rating_id": "e84b072d-71b3-4d3e-86ae-31a8ce4e53b7",
+        "publisher": {
+          "name": "Company",
+          "url": "https://company.tld"
+        },
         "screenshots": [{
           "src": "images/screenshot.png",
           "sizes": "800x600",
@@ -273,6 +277,31 @@
           Works</a> and <a href=
           "https://www.globalratings.com/for-developers.aspx">How developers
           can get their games and apps rated with IARC</a>.
+        </p>
+      </section>
+      <section>
+        <h3>
+          `publisher` member
+        </h3>
+        <p>
+          The <code><dfn>publisher</dfn></code> member is a singleton
+          <a>object</a> that provides the application publisher's <dfn data-lt=
+          "publisher name" data-lt-nodefault="">`name`</dfn> and <dfn data-lt=
+          "publisher URL" data-lt-nodefault="">`url`</dfn>.
+        </p>
+        <pre class="example json" title="Using the publisher member">
+        {
+          "name": "An App",
+          "publisher": {
+            "name": "Organization Name",
+            "url": "https://organization.tld/"
+          }
+        }
+        </pre>
+        <p>
+          Given that this information is unverified, implementors should
+          [=verify an application's publisher=] before presenting this
+          information to end users.
         </p>
       </section>
       <section>
@@ -496,6 +525,85 @@
           </dd>
         </dl>
       </section>
+    </section>
+    <section>
+      <h2>
+        <dfn>Verifying the publisher</dfn>
+      </h2>
+      <p>
+        To prevent application spoofing and other attacks, implementers should
+        verify publisher information.
+      </p>
+      <p>
+        The algorithm, below, allows for an optional verification step that
+        makes use of a <dfn>publisher verification service</dfn>. This step is
+        left to the implementor to define and may consist of automated or
+        manual checks that determine if the [=publisher name=] matches the
+        [=publisher URL=].
+      </p>
+      <p>
+        Just as the web app claims a publisher, the publisher attests to having
+        published the web app. This is done using an <dfn>attestation
+        file</dfn>. An attestation file is a text file located at
+        /.well-known/published-web-apps within the publisher’s primary domain.
+        The text file is populated with a list of web apps, each on its own
+        line and represented by its [=manifest=] [=URL=].
+      </p>
+      <pre class="example">
+        https://origin1.tld/manifest.json
+        https://origin2.tld/static/manifest.json
+      </pre>
+      <p>
+        To <dfn>verify an application's publisher</dfn>, given [=ordered map=]
+        |manifest:ordered map|, [=object=] |publisher:object|, [=URL=]
+        |manifest URL:URL|, and optional [=publisher verification service=]
+        |service:publisher verification service|:
+      </p>
+      <ol class="algorithm">
+        <li>Let |fallback:object| be a new [=object=].
+        </li>
+        <li>Set |fallback|["name"] to the [=url/host=] of |manifest URL|.
+        </li>
+        <li>Set |fallback|["url"] to an empty [=string=].
+        </li>
+        <li>Set |manifest|["publisher"] to |fallback|.
+        </li>
+        <li>If |publisher|["url"] and |publisher|["name"], then
+          <ol>
+            <li>If |service|, then
+              <ol>
+                <li>Let |verified:boolean| be the [=response=] resulting from
+                verifying |publisher| using |service|.
+                </li>
+                <li>If |verified| is false, then return
+                </li>
+              </ol>
+            </li>
+            <li>Let |publisher_origin:string| be the [=url/origin=] of
+            |publisher|["url"].
+            </li>
+            <li>Let |attestation_file:string| be
+            "/.well-known/published-web-apps".
+            </li>
+            <li>Let |attestation:string| be the result of concatenating
+            |publisher_origin| and |attestation_file|
+            </li>
+            <li>Let |response:object| be the [=response=] resulting from
+            [=fetching|fetch=] |attestation|.
+            </li>
+            <li>If |response|["status"] equals "200", then
+              <ol>
+                <li>Let |owned_urls:ordered set| be an [=ordered set=] whose
+                value is the result of splitting |response|["body"] on CRLF.
+                </li>
+                <li>If |owned_urls| contains |manifest URL|, set
+                |manifest|["publisher"] to |publisher|
+                </li>
+              </ol>
+            </li>
+          </ol>
+        </li>
+      </ol>
     </section>
     <section id="internationalization" class="appendix informative">
       <h2>
